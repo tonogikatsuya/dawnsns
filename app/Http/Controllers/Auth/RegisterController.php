@@ -79,7 +79,36 @@ class RegisterController extends Controller
         if($request->isMethod('post')){
             $data = $request->input();
 
+            $validator = validator::make(
+                $data,
+                [
+                    'username' => ['required', 'between:4,12', ],
+                    'mail' => ['required', 'email'],
+                    'password' => ['required', 'between:4,12', 'alpha_num'],
+                    'password-confirm' => ['required', 'between:4,12', 'alpha_num', 'same:password'],
+                ],
+                [
+                    'username.required' => '必須項目です',
+                    'username.between' => '4文字以上、12文字以内で入力して下さい',
+                    'mail.required' => '必須項目です',
+                    'mail.email' => 'メールアドレスではありません',
+                    'password.required' => '必須項目です',
+                    'password.between' => '4文字以上、12文字以内で入力して下さい',
+                    'password.alpha_num' => '英数字のみで入力して下さい',
+                    'password-confirm.required' => '必須項目です',
+                    'password-confirm.between' => '4文字以上、12文字以内で入力して下さい',
+                    'password-confirm.alpha_num' => '英数字のみで入力して下さい',
+                    'password-confirm.same' => 'パスワードと確認用パスワードが一致していません',
+                 ]
+            );
+           if ($validator->fails()) {
+                        return redirect('/register')
+                        ->withErrors($validator)
+                        ->withInput();
+                    }
+
             $this->create($data);
+            session()->put('name',$data['username']);
             return redirect('added');
         }
         return view('auth.register');
