@@ -17,11 +17,11 @@
   <td>{{ $post->posts }}</td>
   <td>{{ $post->created_at }}</td>
   <td>
-    <a href="/public/images/edit.png">編集</a>
+    <a href="/public/images/edit.png"　alt="編集">編集</a>
 
   </td>
   <td>
-    <img src="/images/trash_h.png" alt="削除">
+    <a href="/public/images/trash_h.png"　onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')"　alt="削除">削除</a>
   </td>
 </tr>
 @endforeach
