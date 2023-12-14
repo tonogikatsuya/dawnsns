@@ -17,11 +17,16 @@
   <td>{{ $post->posts }}</td>
   <td>{{ $post->created_at }}</td>
   <td>
-    <a href="/public/images/edit.png"　alt="編集">編集</a>
+    <form action="/post/update" method="post">
+      @csrf
+      <input type="hidden" name="id" value="{{ $post->id }}">
+      <input type="text" name="upPost" placeholder="何？">
+      <input type="image" src="/images/post.png" alt="投稿画像">
+    </form>
 
   </td>
   <td>
-    <a href="/public/images/trash_h.png"　onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')"　alt="削除">削除</a>
+    <a href="/post/delete/{{ $post->id }}" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')" alt="削除">削除</a>
   </td>
 </tr>
 @endforeach
