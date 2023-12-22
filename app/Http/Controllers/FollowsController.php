@@ -12,18 +12,28 @@ class FollowsController extends Controller
     public function followList(){
         $follows = DB::table('follows')
             ->join('users', 'follows.id', '=', 'users.id')
-            ->where('follow',  Auth::id())
+            ->where('follower',  Auth::id())
             ->select('follows.id', 'follows.created_at', 'users.username', 'users.images')
             ->get();
-        return view('follows.followList', ['follows'=>$follows]);
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->where('follower',  Auth::id())
+            ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.username', 'users.images')
+            ->get();
+        return view('follows.followList', ['follows'=>$follows, 'posts'->$post]);
     }
 
     public function followerList(){
         $follows = DB::table('follows')
             ->join('users', 'follows.id', '=', 'users.id')
-            ->where('follower', Auth::id())
+            ->where('follow', Auth::id())
             ->select('follows.id', 'follows.created_at', 'users.username', 'users.images')
             ->get();
-        return view('follows.followerList', ['follows'=>$follows]);
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->where('follow', Auth::id())
+            ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.username', 'users.images')
+            ->get();
+        return view('follows.followerList', ['follows'=>$follows, 'posts'->$post]);
     }
 }
