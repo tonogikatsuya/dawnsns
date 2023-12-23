@@ -4,6 +4,12 @@
 
 @foreach($follows as $follow)
 <img src="images/{{ $follow->images}}">
+<td>{{ $follow->username }}</td>
+@endforeach
+
+@foreach($posts as $post)
+<td>{{ $post->posts }}</td>
+<td>{{ $post->created_at }}</td>
 
 @endforeach
 

@@ -17,10 +17,11 @@ class FollowsController extends Controller
             ->get();
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
+            ->join('follows','users.id', '=', 'follows.follow')
             ->where('follower',  Auth::id())
             ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.username', 'users.images')
             ->get();
-        return view('follows.followList', ['follows'=>$follows, 'posts'->$post]);
+        return view('follows.followList', ['follows'=>$follows, 'posts'=>$posts]);
     }
 
     public function followerList(){
