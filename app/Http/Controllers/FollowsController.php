@@ -37,4 +37,8 @@ class FollowsController extends Controller
             ->get();
         return view('follows.followerList', ['follows'=>$follows, 'posts'->$post]);
     }
+
+    public function otherUser(){
+
+    }
 }
