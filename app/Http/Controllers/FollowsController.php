@@ -44,6 +44,7 @@ class FollowsController extends Controller
             ->wher('users.id', $id)
             ->select('users.id', 'users.username', 'users.bio', 'users.images')
             ->get();
+            dd($post);
     return view('users.other', ['follows'=>$follows]);
     }
 }
