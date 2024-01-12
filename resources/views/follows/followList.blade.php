@@ -3,7 +3,7 @@
 @section('content')
 
 @foreach($follows as $follow)
-<img src="images/{{ $follow->images}}">
+<a href="/other-profile/{{ $follow->id }}"><img src="images/{{ $follow->images }}"></a>
 <td>{{ $follow->username }}</td>
 @endforeach
 
