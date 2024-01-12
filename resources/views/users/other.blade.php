@@ -7,7 +7,7 @@
 <td>
   <a href="/other-profile/{{ $follow->id }}"  alt="アイコン">>/images/{{ $follow->images }}</a>
 </td>
-<td>{{ $follow->created_at }}</td>
+<td>{{ $follow->bio }}</td>
 @endforeach
 
 

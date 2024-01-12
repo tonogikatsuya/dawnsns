@@ -8,6 +8,7 @@
 @endforeach
 
 @foreach($posts as $post)
+<td>{{ $post->username }}</td>
 <td>{{ $post->posts }}</td>
 <td>{{ $post->created_at }}</td>
 
