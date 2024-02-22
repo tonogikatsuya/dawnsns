@@ -1,10 +1,13 @@
 @extends('layouts.login')
 
 @section('content')
-<form action="/search" method="post">
+<form action="/search" method="get">
   @csrf
-  <input type="text" name="userName" placeholder="ユーザー名">
+  <input type="text" name="keyword" placeholder="ユーザー名">
+  <input type="submit" value="検索">
 </form>
+<p>検索ワード：{{ $keyword }}</p>
+
 
 <table>
 @foreach ($follows as $follow)

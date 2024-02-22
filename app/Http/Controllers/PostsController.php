@@ -15,6 +15,7 @@ class PostsController extends Controller
             ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.username', 'users.images')
             ->get();
         // dd($posts);
+        //dd($follow_count);
         return view('posts.index',['posts'=>$posts]);
     }
 

@@ -41,9 +41,15 @@ class FollowsController extends Controller
     public function otherUser($id){
         $follows = DB::table('follows')
             ->join('users', 'follows.follower', '=', 'users.id')
-            ->where('users.id', $id)
+            ->where('follows.follower', $id)
+            ->where('follows.follow', Auth::id())
             ->select('users.id', 'users.username', 'users.bio', 'users.images')
             ->get();
-        return view('users.other', ['follows'=>$follows]);
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=' , 'users.id')
+            ->where('posts.user_id',$id)
+            ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.images')
+            ->get();
+        return view('users.other', ['follows'=>$follows, 'posts'=>$posts]);
     }
 }
