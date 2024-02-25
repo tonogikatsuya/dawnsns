@@ -28,7 +28,7 @@
           <form action="/post/update" method="post">
             @csrf
             <input type="hidden" name="id" value="{{ $post->id }}">
-            <input type="text" name="upPost" value="{{ $post->posts }}">
+            <input type="text" name="upPost" maxlength="150" value="{{ $post->posts }}">
             <input type="image" src="/images/post.png" alt="投稿画像">
           </form>
         </div>
@@ -37,8 +37,7 @@
 
   </td>
   <td>
-    <a href="/post/delete/{{ $post->id }}" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')" alt="削除" ><img src="/images/trash.png" alt="削除"></a>
-  </td>
+    <a href="/post/delete/{{ $post->id }}" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')" alt="削除" ><img src="/images/trash.png" onmouseover="this.src='/images/trash_h.png'" onmouseout="this.src='/images/trash.png'"alt="削除"></a>
 </tr>
 @endforeach
 </table>

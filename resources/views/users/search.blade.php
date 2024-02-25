@@ -17,8 +17,11 @@
   </td>
   <td>{{ $follow->username }}</td>
   <td>
-    <a href="/addfollow/{{ $follow->id }}" alt="フォローする">フォローする</a>
+    @if($folloings->contains($follow->id))
     <a href="/remfollow/{{ $follow->id }}" alt="フォローをはずす">フォローをはずす</a>
+    @else
+    <a href="/addfollow/{{ $follow->id }}" alt="フォローする">フォローする</a>
+    @endif
   </td>
 </tr>
 @endforeach

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="{{ asset('/css/reset.css') }}">
     <link rel='stylesheet' href="{{ asset('/css/style.css') }}">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -24,18 +24,25 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/main_logo.png"></a></h1>
+            <h1><a><img src="images/main_logo.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p>{{ $username }}さん<img src="images/arrow.png"></p>
+                    <p>{{ $username }}さん<img src="{{ asset('storage/img/' . Auth::user()->images) }}" ></p>
                 <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
+
             </div>
         </div>
+        <div class="toggle_switch">
+            <p>クリックでオープン</p>
+        </div>
+        <div class="toggle_contents">
+            <ul>
+                <li><a href="/top">ホーム</a></li>
+                <li><a href="/profile">プロフィール</a></li>
+                 <li><a href="/logout">ログアウト</a></li>
+           </ul>
+        </div>
+
     </header>
     <div id="row">
         <div id="container">

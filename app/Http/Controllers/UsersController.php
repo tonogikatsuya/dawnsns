@@ -10,13 +10,17 @@ class UsersController extends Controller
 {
     //
     public function index(Request $request){
+        $folloings = DB::table('follows')
+        ->where('follower' , Auth::id())
+        ->pluck('follow');
         $keyword = $request->input('keyword');
         $follows = DB::table('users')
             ->leftJoin('follows', 'users.id', 'follows.follow')
             ->where('username','like','%'.$keyword.'%')
+            ->where('follow' , '!=', Auth::id())
             ->select('users.id', 'users.username', 'users.images')
             ->get();
-        return view('users.search',['follows'=>$follows, 'keyword'=> $keyword]);
+        return view('users.search',['follows'=>$follows, 'keyword'=> $keyword, 'folloings'=>$folloings]);
     }
 
     public function addfollow($follow){
