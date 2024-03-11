@@ -3,7 +3,7 @@
 @section('content')
 <form action="/create" method="post">
   @csrf
-  <input type="text" name="newPost" placeholder="何をつぶやこうか？">
+  <input type="text" name="newPost" maxlength="150" placeholder="何をつぶやこうか？">
   <input type="image" src="/images/post.png" alt="投稿画像">
 </form>
 
@@ -16,6 +16,7 @@
   <td>{{ $post->username }}</td>
   <td>{{ $post->posts }}</td>
   <td>{{ $post->created_at }}</td>
+  @if($post->user_id == Auth::id())
   <td>
     <div class="/post/update" >
       <div class="modalopen" data-target="modal{{ $post->id }}">
@@ -38,6 +39,8 @@
   </td>
   <td>
     <a href="/post/delete/{{ $post->id }}" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')" alt="削除" ><img src="/images/trash.png" onmouseover="this.src='/images/trash_h.png'" onmouseout="this.src='/images/trash.png'"alt="削除"></a>
+  </td>
+     @endif
 </tr>
 @endforeach
 </table>

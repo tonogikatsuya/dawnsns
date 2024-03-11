@@ -6,7 +6,9 @@
   <input type="text" name="keyword" placeholder="ユーザー名">
   <input type="submit" value="検索">
 </form>
+@if(isset($keyword))
 <p>検索ワード：{{ $keyword }}</p>
+@endif
 
 
 <table>

@@ -10,12 +10,17 @@ class PostsController extends Controller
 {
     //
     public function index(){
+        $followings = DB::table('follows')
+             ->where('follower', Auth::id())
+             ->pluck('follow')
+             ->toArray();
+             $followings[] = Auth::id();
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
+            ->whereIn('user_id', $followings)
             ->select('posts.id', 'posts.user_id', 'posts.posts', 'posts.created_at', 'users.username', 'users.images')
             ->get();
         // dd($posts);
-        //dd($follow_count);
         return view('posts.index',['posts'=>$posts]);
     }
 
